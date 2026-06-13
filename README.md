@@ -218,8 +218,12 @@ judgement live. The full treatment is in [`docs/framework.md`](docs/framework.md
 
 ## Contact
 
-Questions, ideas, or want to compare notes on governing knowledge bases? Reach the author
-(**释则生 / Shi Zesheng**) on WeChat:
+Questions, ideas, or want to compare notes on governing knowledge bases — Buddhist text
+corpora and code-intelligence governance especially welcome? Reach the author
+(**释则生 / Shi Zesheng**):
+
+- **Email**: budgood@163.com
+- **WeChat**:
 
 <img src="docs/assets/wechat-shizesheng.png" alt="WeChat: 释则生" width="240">
 
