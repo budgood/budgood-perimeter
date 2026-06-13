@@ -1,0 +1,12 @@
+# gitnexus adapter — a SECOND, deliberately different store to test the engine's generality.
+# GitNexus is a TypeScript code-intelligence tool; its "store" is a graph DB (graphology +
+# LadybugDB) under .gitnexus/, NOT a set of jsonl records. Readers are .ts modules that go
+# through the LadybugDB layer. Set project_root to your GitNexus checkout.
+project_root = "C:/Users/you/GitNexus"   # adjust to your checkout
+
+[paths]
+manifest = "channels.jsonl"
+attestations = "attestations.jsonl"
+
+[staleness]
+threshold_days = 14

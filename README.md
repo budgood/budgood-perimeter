@@ -166,10 +166,11 @@ domain code**. A complete, real, high-stakes adapter (a scholarly knowledge grap
 
 ## Validated on real data
 
-The generic engine, run against a **live knowledge graph** through the example adapter,
-reproduced that project's hand-written audit **number-for-number**, then a real survey converged
-it to `born/died/changed = 0`, and `labels` surfaced **3 real metadata leaks**. 12 unit tests
-pass with zero dependencies. Full brief: [`docs/validation.md`](docs/validation.md).
+The generic engine was validated against **two structurally different real stores with zero core
+changes**: a live jsonl **knowledge graph** (`examples/buddhist-kg`, where it reproduced the
+project's hand-written audit number-for-number) and a TypeScript **code-intelligence graph DB**
+(`examples/gitnexus`, GitNexus). The same engine governs both; `labels` surfaced real metadata
+leaks in each. 12 unit tests pass with zero dependencies. Full brief: [`docs/validation.md`](docs/validation.md).
 
 ---
 

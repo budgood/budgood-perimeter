@@ -121,3 +121,34 @@ PYTHONPATH=. python3 -m budgood_perimeter labels --config examples/buddhist-kg/p
 ### 诚实标注
 - 两条通道分类（`detect_text` 判 preserving；`encode` 判 leak）是据访问信号判定的，清单里已注明"待深读确认"——活的判断，连同其依据一并留痕。
 - 3 个真实泄漏目前只是被**列出**、未被修；修法（应用 `taint`）会改到领域自己的 reader 代码，留给维护者定夺。
+
+---
+
+## Second adapter — generality test (gitnexus, 2026-06-14)
+
+**English.** To test whether the engine is *general* or merely *fitted to the KG it was extracted
+from*, the unchanged engine was pointed at **GitNexus**, a TypeScript code-intelligence tool whose
+store is a **graph database** (graphology + a custom LadybugDB under `.gitnexus/`) — structurally
+unlike a jsonl KG. Result, **zero engine changes**:
+
+| step | result |
+|---|---|
+| `scan` (predicate over `gitnexus/src/**/*.ts`, `access_pattern = LadybugDB\|lbug`) | `live 54 · registered 4 · born 50` |
+
+Three findings:
+1. **A non-file store works because the engine never opens the store** — it enumerates the `.ts`
+   readers and never touches the graph DB. The "never read the store" design is what makes it
+   store-shape-agnostic.
+2. **For a store behind an access layer, the predicate targets the layer** (`lbug`), not the raw
+   `.gitnexus/` path — absorbed by the versioned predicate with zero core change.
+3. **Label-preservation generalizes with a different grade vocabulary** — code intelligence's grade
+   is resolution `confidence` / `unresolved` / `isAmbiguous` (410 / 95 / 2 occurrences), not
+   `tier`/`candidate`. A reader returning a resolved edge without its confidence is the same leak;
+   `taint.GRADE_FIELDS` is simply configured per domain.
+
+**Conclusion.** The generality claim is no longer n=1. Two structurally different real stores
+(a jsonl KG, a TS graph DB) are governed by the same unchanged engine. The boundary remains the
+documented one: *readers must reference the store textually in source* (the same indirection limit
+seen in both domains).
+
+**中文。** 为检验引擎是"通用"还是"只贴合它被抽出来的那个 KG",把**未改动**的引擎指向 **GitNexus**——一个 TypeScript 代码智能工具,其 store 是**图数据库**(graphology + 自研 LadybugDB,在 `.gitnexus/`),与 jsonl KG 形状根本不同。结果,**零引擎改动**:`scan` 得 `live 54 · registered 4 · born 50`。三发现:① store 是图 DB 非文件,但引擎从不打开 store、只枚举读它的 `.ts` 模块,故照样治理——"不读 store"正是它形状无关的根因;② 读图走 `lbug` 访问层,谓词瞄该层而非 `.gitnexus/` 路径,版本化谓词零改动吸收;③ label 保全带不同 grade 词汇照样成立——代码智能的等级是解析 `confidence`/`unresolved`/`isAmbiguous`(410/95/2 处),非 tier/candidate;reader 返回解析结果却丢 confidence 即同类泄漏,`taint.GRADE_FIELDS` 按域配置即可。**结论:通用性主张不再是 n=1**;两个结构迥异的真实 store(jsonl KG、TS 图 DB)由同一未改引擎治理。边界仍是已记录的那条:reader 须在源码中以文本形式引用 store。
