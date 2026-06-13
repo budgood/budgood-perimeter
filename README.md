@@ -176,12 +176,7 @@ leaks in each. 12 unit tests pass with zero dependencies. Full brief: [`docs/val
 
 ## The thinking behind it (optional reading)
 
-**Origin — this was not built to optimize "Loop Engineering" or any agent framework.** It was
-extracted from a real system its author built to govern a long-lived scholarly knowledge corpus,
-where one practical question kept biting: *what reads this knowledge base now, and does each
-record's grade — its "unverified" / "low-confidence" / "candidate" status — survive as it passes
-through?* The tool exists because that problem was real, recurring, and unowned — not because of any
-trend in agent tooling.
+**Origin — this was not built to optimize "Loop Engineering" or any agent framework.** It was extracted from a real system its author built to govern a long-lived scholarly knowledge corpus. Two practical questions kept biting. First: *how many things actually read this knowledge base now?* — over time, scripts, services, and agents pile up until the list of readers outgrows anyone's memory. Second, and subtler: every record carries a **grade**, a marker like "unverified", "low-confidence", or "candidate" that says *how much to trust it*. When a reader pulls that record and passes it downstream, does it **carry the marker along, or quietly drop it?** A reader that drops it turns a flagged guess into apparent fact. The tool exists because both problems were real, recurring, and unowned — not because of any trend in agent tooling.
 
 budgood-perimeter is the first tool from a small design discipline its author calls **缘起工程 /
 Condition Engineering** — itself rooted in classical categories (亲因 *primary cause* vs 增上缘
