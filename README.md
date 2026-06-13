@@ -216,6 +216,13 @@ judgement live. The full treatment is in [`docs/framework.md`](docs/framework.md
 | label-preserving | whether a reader carries the store's metadata (grade) across its boundary |
 | leak | a reader that returns store content with the grade stripped off |
 
+## Contact
+
+Questions, ideas, or want to compare notes on governing knowledge bases? Reach the author
+(**释则生 / Shi Zesheng**) on WeChat:
+
+<img src="docs/assets/wechat-shizesheng.png" alt="WeChat: 释则生" width="240">
+
 ## License
 
 [Apache-2.0](LICENSE).
