@@ -176,8 +176,16 @@ leaks in each. 12 unit tests pass with zero dependencies. Full brief: [`docs/val
 
 ## The thinking behind it (optional reading)
 
+**Origin — this was not built to optimize "Loop Engineering" or any agent framework.** It was
+extracted from a real system its author built to govern a long-lived scholarly knowledge corpus,
+where one practical question kept biting: *what reads this knowledge base now, and does each
+record's grade — its "unverified" / "low-confidence" / "candidate" status — survive as it passes
+through?* The tool exists because that problem was real, recurring, and unowned — not because of any
+trend in agent tooling.
+
 budgood-perimeter is the first tool from a small design discipline its author calls **缘起工程 /
-Condition Engineering**. One idea drives the whole thing:
+Condition Engineering** — itself rooted in classical categories (亲因 *primary cause* vs 增上缘
+*contributory condition*), not in agent frameworks. One idea drives the whole thing:
 
 > **Never let the substrate become the *primary cause* of a decision.** Data, tables, code, and
 > even this tool can *inform* a judgement; they must not *make* it. The judgement stays in the
@@ -195,12 +203,9 @@ Three invariants fall out of that, and the tool enforces them on itself:
    and then it could quietly decide it's complete. So the apex act stays unforced; the tool only
    guarantees you can never *quietly believe* your list is correct.
 
-The larger claim, for those coming from agent tooling: **closing the loop is one setting of a
-dial, not a goal.** Agentic "loop engineering" asks *"how do I close the loop so the agent
-converges?"* This asks *"where is judgement allowed to live, and how do I make every place I
-stopped looking impossible to forget?"* Loop-closure is the right setting only when you have a
-hard, cheap oracle and a reversible action; for everything else, you govern the perimeter and keep
-judgement live. The full treatment is in [`docs/framework.md`](docs/framework.md).
+**On agentic loops — a contrast worth drawing (though not the motivation).** It wasn't built to fix agentic *loop engineering*, but holding the two side by side is genuinely clarifying, because they make opposite bets about *where judgement lives*. Loop engineering pushes judgement *out* of the model and into the scaffold — evals, routers, verifiers that decide and converge automatically. This keeps judgement *in* the live act and uses data only to make risks impossible to miss.
+
+The useful part is that the two bets fail differently. Hardened scaffolds fail **silently and systematically**: when the world shifts, a stale eval or router keeps deciding — confidently wrong, and the error is institutionalized into a rule (the real incident where a drifting verifier quietly escalated ~90% of traffic to the most expensive model, nothing erroring). Live judgement fails **locally and stochastically**: someone misjudges once, but it isn't frozen into a rule. So loop-closure is one *setting of a dial* — the right one with a hard, cheap oracle and a reversible action, and malpractice without them. budgood-perimeter is what the other end of that dial looks like, made concrete. The full calibration theory — and how the lineage runs prompt engineering → context engineering → governed perimeter — is in [`docs/framework.md`](docs/framework.md).
 
 ## Concepts
 
