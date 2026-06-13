@@ -1,0 +1,6 @@
+project_root = "fakeproj"
+[paths]
+manifest = "channels.jsonl"
+attestations = "attestations.jsonl"
+[staleness]
+threshold_days = 14

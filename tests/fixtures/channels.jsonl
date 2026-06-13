@@ -1,0 +1,6 @@
+// fixture manifest — zero domain content
+{"id":"STORE-001","type":"store","status":"active","canonical_files":["fake_store.jsonl"]}
+{"id":"PRED-001","type":"predicate","status":"active","version":"v1","include_globs":["**/*.py"],"access_pattern":"open_store|fake_store\\.jsonl","exclude_substrings":["__pycache__"]}
+{"id":"CH-001","type":"channel","status":"active","path":"reader_a.py","role":"reader","ownership":"owned","label_preserving":true,"found_under_predicate":"v1","last_confirmed":"2026-06-14"}
+{"id":"UN-001","type":"unowned","status":"active","boundary":"human copies a value out of a render","hazard":"low","last_judged":"2026-06-14"}
+{"id":"CH-003","type":"channel","status":"active","path":"reader_c.py","role":"reader","ownership":"owned","label_preserving":false,"found_under_predicate":"v1","last_confirmed":"2026-06-14","notes":"returns bare values, strips grade"}

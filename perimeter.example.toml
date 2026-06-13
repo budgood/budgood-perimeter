@@ -1,0 +1,22 @@
+# budgood-perimeter config. Copy to perimeter.toml and edit.
+# Paths are resolved relative to THIS file's directory.
+
+# Tree to scan for channels (files that reference the store).
+project_root = "."
+
+[paths]
+# Append-only manifest holding store / predicate / channel / unowned records.
+manifest = "channels.jsonl"
+# Append-only log of perimeter surveys.
+attestations = "attestations.jsonl"
+
+[staleness]
+# Days after which `staleness` illuminates an overdue survey. Illuminate-only; never a deadline.
+threshold_days = 14
+
+# NOTE: the predicate (what counts as a channel) is NOT here.
+# It lives in the manifest as a versioned, append-only `predicate` record, e.g.:
+# {"id":"PRED-001","type":"predicate","status":"active","version":"v1",
+#  "include_globs":["**/*.py"],
+#  "access_pattern":"load_store|my_index\\.jsonl|/store/",
+#  "exclude_substrings":[".backups","__pycache__","/tmp/","tests/fixtures"]}

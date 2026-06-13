@@ -1,0 +1,10 @@
+# buddhist-kg adapter — hardest-corner reference instance (no hard oracle, high irreversibility).
+# project_root points at YOUR DB checkout. (Windows path shown; adjust to your machine.)
+project_root = "D:/translate_workspace/DB"
+
+[paths]
+manifest = "channels.jsonl"
+attestations = "attestations.jsonl"
+
+[staleness]
+threshold_days = 14
